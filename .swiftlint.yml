@@ -1,0 +1,8 @@
+included:
+  - Sources
+  - Tests
+  - Example
+  - Package.swift
+excluded:
+  - .build
+  - .source
