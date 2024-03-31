@@ -24,9 +24,8 @@ checkout() {
 	recreate_dir $SOURCE_DIR
 	cd $SOURCE_DIR
 	# Change this when visionOS support is added
-	git clone git@github.com:ijingo/ffmpeg-kit.git
+	git clone git@github.com:mihai8804858/ffmpeg-kit.git
 	cd ffmpeg-kit
-	git checkout xros
 }
 
 build_ios() {
