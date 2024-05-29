@@ -49,6 +49,14 @@ sh ./build-libraries.sh
 
 The script will rebuild all C dependencies for all platforms and architectures, create XCFrameworks from them, and move them to `Libraries` folder.
 
+## Prebuilt Versions
+
+* `fontconfig` - `2.15.0`
+* `freetype` - `2.13.2`
+* `fribidi` - `1.0.14`
+* `harfbuzz` - `8.5.0`
+* `libpng` - `1.6.43`
+* `libass` - `0.17.2`
 
 ## License
 
