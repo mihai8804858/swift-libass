@@ -97,6 +97,14 @@ create_fat_libraries() {
 		./$BUILD_DIR/apple-tvos-arm64-simulator-lts/$1/$3 \
 		./$BUILD_DIR/apple-tvos-arm64-x86_64-simulator-lts/$1/$3
 
+	mkdir -p ./$BUILD_DIR/apple-xros-arm64-x86_64-simulator-lts/$1/lib
+	create_fat_library \
+		./$BUILD_DIR/apple-xros-arm64-simulator-lts/$1/$2 \
+		./$BUILD_DIR/apple-xros-x86_64-lts/$1/$2 \
+		./$BUILD_DIR/apple-xros-arm64-x86_64-simulator-lts/$1/$2 \
+		./$BUILD_DIR/apple-xros-arm64-simulator-lts/$1/$3 \
+		./$BUILD_DIR/apple-xros-arm64-x86_64-simulator-lts/$1/$3
+
 	mkdir -p ./$BUILD_DIR/apple-macos-arm64-x86_64-lts/$1/lib
 	create_fat_library \
 		./$BUILD_DIR/apple-macos-arm64-lts/$1/$2 \
@@ -122,8 +130,8 @@ create_xcframework() {
 		-headers ./$BUILD_DIR/apple-tvos-arm64-x86_64-simulator-lts/$1/$3 \
 		-library ./$BUILD_DIR/apple-xros-arm64-lts/$1/$2 \
 		-headers ./$BUILD_DIR/apple-xros-arm64-lts/$1/$3 \
-		-library ./$BUILD_DIR/apple-xros-arm64-simulator-lts/$1/$2 \
-		-headers ./$BUILD_DIR/apple-xros-arm64-simulator-lts/$1/$3 \
+		-library ./$BUILD_DIR/apple-xros-arm64-x86_64-simulator-lts/$1/$2 \
+		-headers ./$BUILD_DIR/apple-xros-arm64-x86_64-simulator-lts/$1/$3 \
 		-library ./$BUILD_DIR/apple-macos-arm64-x86_64-lts/$1/$2 \
 		-headers ./$BUILD_DIR/apple-macos-arm64-x86_64-lts/$1/$3 \
 		-output  ./$XCF_DIR/$1.xcframework

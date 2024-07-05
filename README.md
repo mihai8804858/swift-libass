@@ -56,7 +56,7 @@ The script will rebuild all C dependencies for all platforms and architectures, 
 * `fribidi` - `1.0.14`
 * `harfbuzz` - `8.5.0`
 * `libpng` - `1.6.43`
-* `libass` - `0.17.2`
+* `libass` - `0.17.3`
 
 ## License
 
