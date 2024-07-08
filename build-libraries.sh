@@ -26,7 +26,7 @@ checkout() {
 	cd $SOURCE_DIR
 	# Change this when visionOS support is added
 	git clone git@github.com:mihai8804858/ffmpeg-kit.git
-	cd ffmpeg-kit
+	cd ..
 }
 
 build_ios() {
@@ -62,10 +62,12 @@ build_macos() {
 }
 
 build() {
+	cd $SOURCE_DIR/ffmpeg-kit
 	build_ios
 	build_tvos
 	build_xros
 	build_macos
+	cd ../..
 }
 
 create_fat_library() {
@@ -139,6 +141,7 @@ create_xcframework() {
 }
 
 create_xcframeworks() {
+	cd $SOURCE_DIR/ffmpeg-kit
 	recreate_dir "./$XCF_DIR"
 
 	create_xcframework "fontconfig" "lib/libfontconfig.a" "include"
@@ -147,15 +150,17 @@ create_xcframeworks() {
 	create_xcframework "fribidi" "lib/libfribidi.a" "include"
 	create_xcframework "libpng" "lib/libpng16.a" "include"
 	create_xcframework "libass" "lib/libass.a" "include"
+
+	cd ../..
 }
 
 move_xcframework() {
-	rm -rf "../../$LIB_DIR/$1.xcframework"
-	cp -r "./$XCF_DIR/$1.xcframework" "../../$LIB_DIR/$1.xcframework"
+	rm -rf "$LIB_DIR/$1.xcframework"
+	cp -r "$SOURCE_DIR/ffmpeg-kit/$XCF_DIR/$1.xcframework" "$LIB_DIR/$1.xcframework"
 }
 
 move_xcframeworks() {
-	recreate_dir "../../$LIB_DIR"
+	recreate_dir $LIB_DIR
 
 	move_xcframework "fontconfig"
 	move_xcframework "freetype"
