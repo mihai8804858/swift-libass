@@ -1,0 +1,7 @@
+framework module harfbuzz {
+    umbrella "../harfbuzz"
+
+    link "harfbuzz"
+
+    export *
+}

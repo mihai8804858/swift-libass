@@ -2,24 +2,10 @@
 import PackageDescription
 import Foundation
 
-func cWrapperName(_ libraryName: String) -> String {
-    "C\(libraryName.capitalized)"
-}
-
-func cWrapperTarget(_ libraryName: String, linkedLibraries: [String] = []) -> Target {
-    .target(
-        name: cWrapperName(libraryName),
-        dependencies: [.target(name: libraryName)],
-        path: "Sources/C/\(cWrapperName(libraryName))",
-        cSettings: [.headerSearchPath("../../../Libraries/**")],
-        linkerSettings: linkedLibraries.map { .linkedLibrary($0) }
-    )
-}
-
 func binaryTarget(_ libraryName: String) -> Target {
     .binaryTarget(
         name: libraryName,
-        path: "Libraries/\(libraryName).xcframework"
+        path: "Libraries/XCFrameworks/\(libraryName).xcframework"
     )
 }
 
@@ -40,15 +26,29 @@ let package = Package(
         .target(
             name: "SwiftLibass",
             dependencies: [
-                .target(name: cWrapperName("fontconfig")),
-                .target(name: cWrapperName("freetype")),
-                .target(name: cWrapperName("harfbuzz")),
-                .target(name: cWrapperName("fribidi")),
-                .target(name: cWrapperName("libpng")),
-                .target(name: cWrapperName("libass"))
+                .target(name: "fontconfig"),
+                .target(name: "freetype"),
+                .target(name: "harfbuzz"),
+                .target(name: "fribidi"),
+                .target(name: "libpng"),
+                .target(name: "libass")
             ],
-            path: "Sources/Swift",
-            resources: [.copy("Resources/PrivacyInfo.xcprivacy")]
+            path: "Sources",
+            resources: [
+                .copy("Resources/PrivacyInfo.xcprivacy")
+            ],
+            linkerSettings: [
+                .linkedLibrary("fontconfig"),
+                .linkedLibrary("freetype"),
+                .linkedLibrary("harfbuzz"),
+                .linkedLibrary("fribidi"),
+                .linkedLibrary("png16"),
+                .linkedLibrary("ass"),
+                .linkedLibrary("expat"),
+                .linkedLibrary("iconv"),
+                .linkedLibrary("z"),
+                .linkedLibrary("m")
+            ]
         ),
         .testTarget(
             name: "SwiftLibassTests",
@@ -61,18 +61,6 @@ let package = Package(
         binaryTarget("harfbuzz"),
         binaryTarget("fribidi"),
         binaryTarget("libpng"),
-        binaryTarget("libass"),
-        // C Wrapper Targets
-        cWrapperTarget("fontconfig"),
-        cWrapperTarget("freetype"),
-        cWrapperTarget("harfbuzz"),
-        cWrapperTarget("fribidi"),
-        cWrapperTarget("libpng"),
-        cWrapperTarget("libass", linkedLibraries: [
-            "expat",
-            "iconv",
-            "z",
-            "m"
-        ])
+        binaryTarget("libass")
     ]
 )

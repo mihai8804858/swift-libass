@@ -1,0 +1,7 @@
+framework module fribidi {
+    umbrella "../fribidi"
+
+    link "fribidi"
+
+    export *
+}

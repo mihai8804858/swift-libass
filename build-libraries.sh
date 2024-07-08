@@ -5,7 +5,8 @@ set -e
 SOURCE_DIR=.source
 BUILD_DIR=prebuilt
 XCF_DIR=$BUILD_DIR/xcframeworks
-LIB_DIR=Libraries
+LIB_DIR=Libraries/XCFrameworks
+MODULE_MAPS_DIR=Libraries/ModuleMaps
 
 IOS_TARGET=15.0
 TVOS_TARGET=15.0
@@ -164,7 +165,40 @@ move_xcframeworks() {
 	move_xcframework "libass"
 }
 
+move_module_map_for_arch() {
+	HEADERS=$LIB_DIR/$2/$3/Headers
+	UMBRELLA_DIR=$HEADERS/$1
+	TEMP_DIR_NAME=temp
+	TEMP_DIR=$HEADERS/$TEMP_DIR_NAME
+	MODULE_MAP_SRC=$MODULE_MAPS_DIR/$1/module.modulemap
+	MODULE_MAP_DST=$TEMP_DIR/module.modulemap
+	MODULE_MAP_FINAL=$UMBRELLA_DIR/module.modulemap
+
+	recreate_dir $TEMP_DIR
+	find $HEADERS -mindepth 1 -maxdepth 1 -not \( -name "$TEMP_DIR_NAME" \) -exec mv {} $TEMP_DIR \;
+	cp $MODULE_MAP_SRC $MODULE_MAP_DST
+	mv $TEMP_DIR $UMBRELLA_DIR
+
+	echo "modulemap successfully written out to: $MODULE_MAP_FINAL"
+}
+
+move_module_map() {
+	for ARCH in $(find $LIB_DIR/$2 -mindepth 1 -maxdepth 1 -type d); do
+	    move_module_map_for_arch $1 $2 $(basename $ARCH)
+	done
+}
+
+move_module_maps() {
+	move_module_map "fontconfig" "fontconfig.xcframework"
+	move_module_map "freetype2" "freetype.xcframework"
+	move_module_map "fribidi" "fribidi.xcframework"
+	move_module_map "harfbuzz" "harfbuzz.xcframework"
+	move_module_map "libpng" "libpng.xcframework"
+	move_module_map "libass" "libass.xcframework"
+}
+
 checkout
 build
 create_xcframeworks
 move_xcframeworks
+move_module_maps

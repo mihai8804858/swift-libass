@@ -39,7 +39,7 @@ let renderer = ass_renderer_init(library)
 
 ## Build Dependencies
 
-All C dependencies come prebuilt as XCFramewroks in `Libraries` folder.
+All C dependencies come prebuilt as XCFrameworks in `Libraries` folder.
 
 To rebuild the dependencies, run:
 

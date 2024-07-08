@@ -51,7 +51,13 @@ test-all-platforms:
 lint:
 	swiftlint lint --strict
 
-.PHONY: build-all-platforms test-all-platforms lint
+spell:
+	cspell-cli lint --no-progress
+
+all: lint spell build-all-platforms test-all-platforms
+
+.PHONY: all
+.DEFAULT_GOAL := all
 
 define udid_for
 $(shell xcrun simctl list devices available '$(1)' | grep '$(2)' | sort -r | head -1 | awk -F '[()]' '{ print $$(NF-3) }')

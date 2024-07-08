@@ -1,0 +1,13 @@
+files:
+  - Sources/**/*.swift
+  - Tests/**/*.swift
+  - Package.swift
+  - README.md
+ignoreWords:
+  - xcframework
+  - xcprivacy
+  - fontconfig
+  - freetype
+  - fribidi
+  - harfbuzz
+  - libass
