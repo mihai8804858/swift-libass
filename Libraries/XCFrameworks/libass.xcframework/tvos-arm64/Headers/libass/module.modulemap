@@ -1,7 +1,5 @@
 framework module libass {
     umbrella "../libass"
 
-    link "ass"
-
     export *
 }

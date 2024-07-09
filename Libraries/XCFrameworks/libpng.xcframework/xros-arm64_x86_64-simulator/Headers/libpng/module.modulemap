@@ -1,7 +1,5 @@
 framework module libpng {
     umbrella "../libpng"
 
-    link "png16"
-
     export *
 }

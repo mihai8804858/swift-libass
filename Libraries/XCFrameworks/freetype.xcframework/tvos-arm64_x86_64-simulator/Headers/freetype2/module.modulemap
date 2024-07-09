@@ -1,7 +1,5 @@
 framework module freetype2 {
     umbrella "../freetype2"
 
-    link "freetype"
-
     export *
 }

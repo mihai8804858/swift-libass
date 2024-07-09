@@ -38,12 +38,6 @@ let package = Package(
                 .copy("Resources/PrivacyInfo.xcprivacy")
             ],
             linkerSettings: [
-                .linkedLibrary("fontconfig"),
-                .linkedLibrary("freetype"),
-                .linkedLibrary("harfbuzz"),
-                .linkedLibrary("fribidi"),
-                .linkedLibrary("png16"),
-                .linkedLibrary("ass"),
                 .linkedLibrary("expat"),
                 .linkedLibrary("iconv"),
                 .linkedLibrary("z"),

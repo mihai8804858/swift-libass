@@ -1,7 +1,5 @@
 framework module fontconfig {
     umbrella "../fontconfig"
 
-    link "fontconfig"
-
     export *
 }
