@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 
 import PackageDescription
 import Foundation
@@ -38,7 +38,6 @@ let package = Package(
             resources: [
                 .copy("Resources/PrivacyInfo.xcprivacy")
             ],
-            swiftSettings: [.enableExperimentalFeature("StrictConcurrency")],
             linkerSettings: [
                 .linkedLibrary("expat"),
                 .linkedLibrary("iconv"),
@@ -59,5 +58,5 @@ let package = Package(
         binaryTarget("libpng"),
         binaryTarget("libass")
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageVersions: [.v5]
 )
