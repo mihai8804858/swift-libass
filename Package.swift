@@ -1,7 +1,6 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.2
 
 import PackageDescription
-import Foundation
 
 func binaryTarget(_ libraryName: String) -> Target {
     .binaryTarget(
@@ -38,12 +37,13 @@ let package = Package(
             resources: [
                 .copy("Resources/PrivacyInfo.xcprivacy")
             ],
-            swiftSettings: [.enableExperimentalFeature("StrictConcurrency")],
             linkerSettings: [
                 .linkedLibrary("expat"),
                 .linkedLibrary("iconv"),
                 .linkedLibrary("z"),
-                .linkedLibrary("m")
+                .linkedLibrary("m"),
+                .linkedFramework("CoreFoundation"),
+                .linkedFramework("CoreText")
             ]
         ),
         .testTarget(
